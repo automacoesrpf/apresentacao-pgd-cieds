@@ -4,24 +4,30 @@
    ========================================================= */
 
 :root {
-  --navy: #14538A;
-  --navy-ink: #0E3A61;
-  --teal: #1D7A94;
-  --orange: #F2A020;
-  --red: #C1272D;
-  --paper: #FBF7EF;
-  --paper-dim: #F2EBDD;
-  --white: #FFFFFF;
-  --text: #28241C;
-  --text-soft: #5B5648;
-  --line: #DED3BC;
+  --navy: #14538a;
+  --navy-ink: #0e3a61;
+  --teal: #1d7a94;
+  --orange: #f2a020;
+  --red: #c1272d;
+  --paper: #fbf7ef;
+  --paper-dim: #f2ebdd;
+  --white: #ffffff;
+  --text: #28241c;
+  --text-soft: #5b5648;
+  --line: #ded3bc;
 
   --content-width: 1160px;
   --page-pad: clamp(18px, 4vw, 48px);
   --radius: 8px;
-  --shadow: 0 3px 14px rgba(14, 58, 97, .05);
+  --shadow: 0 3px 14px rgba(14, 58, 97, 0.05);
 
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 *,
@@ -72,7 +78,7 @@ h3,
 h4 {
   margin: 0;
   color: var(--navy-ink);
-  font-family: 'Libre Baskerville', Georgia, serif;
+  font-family: "Libre Baskerville", Georgia, serif;
   font-weight: 500;
   text-wrap: balance;
 }
@@ -107,7 +113,7 @@ header .kicker {
   color: var(--teal);
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 
 header h1 {
@@ -142,7 +148,9 @@ nav.toc a {
   line-height: 1.4;
   text-decoration: none;
   border-bottom: 1px dotted currentColor;
-  transition: color .15s ease, border-color .15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 nav.toc a:hover,
@@ -274,7 +282,7 @@ details.concept {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 1px 5px rgba(14, 58, 97, .025);
+  box-shadow: 0 1px 5px rgba(14, 58, 97, 0.025);
 }
 
 details.concept summary {
@@ -509,13 +517,16 @@ details.concept .body .example {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   text-decoration: none;
-  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .card:hover,
 .card:focus-visible {
   border-color: var(--teal);
-  box-shadow: 0 5px 18px rgba(14, 58, 97, .08);
+  box-shadow: 0 5px 18px rgba(14, 58, 97, 0.08);
   transform: translateY(-2px);
 }
 
@@ -950,7 +961,7 @@ footer {
    ========================================================= */
 
 :focus-visible {
-  outline: 3px solid rgba(29, 122, 148, .35);
+  outline: 3px solid rgba(29, 122, 148, 0.35);
   outline-offset: 3px;
 }
 
@@ -964,5 +975,236 @@ footer {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* =========================================================
+   AJUSTE MOBILE — telas pequenas
+   ========================================================= */
+
+/* Evita qualquer elemento interno de criar scroll horizontal */
+body,
+main,
+section,
+header,
+.greeting,
+.material,
+.card,
+.step {
+  max-width: 100%;
+}
+
+/* Tabelas passam a rolar apenas dentro da própria área */
+details.concept .body {
+  min-width: 0;
+  overflow: hidden;
+}
+
+details.concept .body table {
+  display: table;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  /* Header mais estável em celulares estreitos */
+  header {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  header img.logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  header h1 {
+    font-size: clamp(24px, 8vw, 32px);
+    overflow-wrap: anywhere;
+  }
+
+  header .kicker {
+    line-height: 1.35;
+  }
+
+  /* Menu: cada item pode quebrar sem estourar a largura */
+  nav.toc {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  nav.toc a {
+    width: fit-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  /* Boas-vindas */
+  .greeting .card-inner {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .greeting p {
+    overflow-wrap: anywhere;
+  }
+
+  /* Títulos de seção não ficam espremidos */
+  .section-head {
+    align-items: flex-start;
+  }
+
+  .section-head h2 {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Accordion */
+  details.concept summary {
+    min-width: 0;
+    align-items: flex-start;
+  }
+
+  details.concept summary::before {
+    margin-top: 1px;
+  }
+
+  details.concept .body {
+    padding: 0 14px 18px;
+    overflow-wrap: anywhere;
+  }
+
+  /* Tabelas pequenas continuam legíveis e podem rolar horizontalmente */
+  details.concept .body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: normal;
+  }
+
+  details.concept .body th,
+  details.concept .body td {
+    min-width: 90px;
+  }
+
+  /* Cards de materiais */
+  .material .top,
+  .material details .content {
+    min-width: 0;
+  }
+
+  .material .name,
+  .material .desc,
+  .material details .content p {
+    overflow-wrap: anywhere;
+  }
+
+  /* Listas internas */
+  .sheet-list {
+    min-width: 0;
+  }
+
+  .sheet-list .sheet {
+    min-width: 0;
+  }
+
+  .sheet-list .sheet .t,
+  .sheet-list .sheet .d {
+    overflow-wrap: anywhere;
+  }
+
+  /* Cards dos instrumentos */
+  .card {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .card .name,
+  .card .desc {
+    overflow-wrap: anywhere;
+  }
+
+  /* Próximos passos */
+  .step {
+    min-width: 0;
+  }
+
+  .step > div {
+    min-width: 0;
+  }
+
+  .step .name,
+  .step .desc,
+  .step-links {
+    overflow-wrap: anywhere;
+  }
+
+  .step-links .go {
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+/* Celulares muito estreitos */
+@media (max-width: 380px) {
+  :root {
+    --page-pad: 12px;
+  }
+
+  header {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  header img.logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  header h1 {
+    font-size: 23px;
+  }
+
+  header p {
+    font-size: 12.5px;
+  }
+
+  .greeting .card-inner {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .greeting .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  section h2 {
+    font-size: 21px;
+  }
+
+  details.concept summary {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .material .top,
+  .material details .content {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .step {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .step-links {
+    margin-left: 34px;
   }
 }
